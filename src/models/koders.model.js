@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 
+//se encarga de crear y mostrar objetos en base de datos 
+
 const modelName = 'koders'
 const schema = new mongoose.Schema({
     firstname: { //reglas de ese atributo
@@ -26,11 +28,10 @@ const schema = new mongoose.Schema({
         type: Date,
         required: false,
     },
-    /*generation: {
-        type: Number,
-        min: 1,
-        max: 100,
-    },*/
+    generation: {
+        type: mongoose.Schema.Types.ObjectId, // toma id del docuemnto de la base de datos de generacion 
+        ref: "generations", // hace referencia al modelo
+    },
     createdAt: { // fecha de creacion de documento
         type: Date,
         default: Date.now,

@@ -1,10 +1,11 @@
 const express = require("express")
-const koderUsecase = require("../usecases/koder.usecase")
+const koderUsecase = require("../usecases/koder.usecase");
+const auth = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
 // GET /koders
-router.get("/", async (req, res)=>{
+router.get("/", auth, async (req, res)=>{
     try {
         const koders = await koderUsecase.getAll()
         res.json({
@@ -39,7 +40,7 @@ router.post("/", async (req, res)=>{
 })
 
 //GET /koders/:id 
-router.get('/:id', async (req, res)=>{
+router.get('/:id', auth, async (req, res)=>{
     try {
         //const {id} = req.params //es lo mismo que la linea de abajo 
         const id = req.params.id 
@@ -58,7 +59,7 @@ router.get('/:id', async (req, res)=>{
 })
 
 // DELETE /koders/:id
-router.delete('/:id', async (req, res)=>{
+router.delete('/:id', auth, async (req, res)=>{
     try {
         const {id} = req.params; 
         const koderDelete = await koderUsecase.deleteById(id);
@@ -77,7 +78,7 @@ router.delete('/:id', async (req, res)=>{
 
 // PATCH /kodemia/:id
 
-router.patch('/:id', async(req, res)=>{
+router.patch('/:id', auth, async(req, res)=>{
     try {
         const {id} = req.params; 
         const koderUpdated = await koderUsecase.updateById(id, req.body);
