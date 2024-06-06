@@ -26,12 +26,13 @@ async function create(koderData){ // funcion asincrona espera a que se resuleva 
 };
 
 async function getAll(){
-    const allKoders = await Koders.find(); // find regresa arreglo de documentos 
+    const allKoders = await Koders.find().populate("generation") // find regresa arreglo de documentos 
+    // metodo populate para desplegar la informacion del documento de generacion, hace busqueda interna utilizando la informacion de mongoose
     return allKoders;
 };
 
 async function getById(id){
-    const koder = await Koders.findById(id);
+    const koder = await Koders.findById(id).populate("generation")
     return koder;
 }
 

@@ -16,7 +16,7 @@ const schema = new mongoose.Schema({
             'android'
         ]
     },
-    starDate: {
+    startDate: {
         type: Date, 
         required: true
     },
